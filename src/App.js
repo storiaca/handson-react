@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
-import List from "./components/List";
-import JobItem from "./components/JobListElement";
-import jobs from "./data/jobs";
+//import List from "./components/List";
+//import JobItem from "./components/JobListElement";
+//import jobs from "./data/jobs";
+import JobCreationForm from './components/JobCreationForm';
 
 class App extends Component {
   render() {
@@ -11,7 +12,8 @@ class App extends Component {
         <header className="App-header">
           <h1>Creating a Reusable List Component</h1>
         </header>
-        <List items={jobs} itemElement={JobItem} />
+        {/* <List items={jobs} itemElement={JobItem} /> */}
+        <JobCreationForm />
       </div>
     );
   }
