@@ -6,6 +6,13 @@ import "./App.css";
 import JobCreationForm from './components/JobCreationForm';
 
 class App extends Component {
+  state = { isFormVisible: true };
+
+  toggleFormVisible = () => {
+    this.setState({ 
+      isFormVisible: !this.state.isFormVisible
+    })
+  }
   render() {
     return (
       <div className="App">
@@ -13,7 +20,13 @@ class App extends Component {
           <h1>Creating a Reusable List Component</h1>
         </header>
         {/* <List items={jobs} itemElement={JobItem} /> */}
-        <JobCreationForm />
+
+        <button onClick={this.toggleFormVisible}>
+          {this.state.isFormVisible ? 'Hide form' : 'Show form'}
+        </button>
+        <div style={{ visibility: this.state.isFormVisible ? 'visible' : 'hidden' }}>
+          <JobCreationForm />
+        </div> 
       </div>
     );
   }

@@ -4,7 +4,7 @@ import './InputField.css';
 export default class CheckBoxField extends Component {
   
   render() {
-    const { label, name, onChange } = this.props;
+    const { label, name, onChange, value } = this.props;
     return (
       <div className="checkbox-field">
         <input
@@ -12,6 +12,7 @@ export default class CheckBoxField extends Component {
           name={name}
           id={name}
           onChange={onChange}
+          value={value}
         />
         <label htmlFor={name}>{label}</label>
       </div>
