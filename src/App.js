@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import List from "./components/List";
-import JobItem from "./components/JobListElement";
-//import jobs from "./data/jobs";
+import JobList from "./components/JobList";
 import JobsAPI from './api/JobsAPI';
 import JobCreationForm from './components/JobCreationForm';
 
@@ -37,7 +35,7 @@ class App extends Component {
         <div style={{ display: this.state.isFormVisible ? 'block' : 'none' }}>
           <JobCreationForm />
         </div> 
-        <List items={this.state.jobs} itemElement={JobItem} />
+        <JobList jobs={this.state.jobs} />
 
        
       </div>

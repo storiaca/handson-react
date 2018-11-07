@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './InputField.css';
 
 export default class TextInputField extends Component {
@@ -28,3 +29,11 @@ export default class TextInputField extends Component {
   }
 }
 
+TextInputField.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  required: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func 
+};

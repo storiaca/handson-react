@@ -14,7 +14,7 @@ export default class ConsentInput extends Component {
         <CheckboxField 
           onChange={onChange}
           value={acceptedToS}
-          value={acceptedToS}
+          name={acceptedToS}
           label="Accept ToS"
         />
         <CheckboxField 
