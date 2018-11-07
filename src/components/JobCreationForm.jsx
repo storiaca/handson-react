@@ -3,6 +3,8 @@ import TextInputField from './form-elements/TextInputField';
 import CheckBoxField from './form-elements/CheckBoxField';
 import SelectField from './form-elements/SelectedField';
 import './JobCreationForm.css';
+import ConsentInput from './form-elements/ConsentInput';
+
 const locationOptions = [
   {value: '', label: 'Blank'}, 
   {value: 'Berlin', label: 'Berlin'}, 
@@ -19,13 +21,16 @@ const initialState = {
   company: '',
   salary: '',
   isRemoteFriendly: false,
-  location: ''
+  location: '',
+  acceptedToS: false,
+  subscibedToNewsletter: false
 };
 
 const isFormDataValid = (state) => 
   state.title.length >= 10 &&
   state.company.length > 0 &&
-  state.salary.length > 0;
+  state.salary.length > 0 &&
+  state.acceptedToS;
 
 
 export default class JobCreationForm extends Component {
@@ -111,7 +116,11 @@ export default class JobCreationForm extends Component {
           onChange={this.handleChange}
           value={this.state.location}
         />
-
+        <ConsentInput 
+          onChange={this.handleChange}
+          acceptedToS={this.state.acceptedToS}
+          subscibedToNewsletter={this.state.subscibedToNewsletter}
+        />
         <button 
           className="job-form__button"
           disabled={!enabled}

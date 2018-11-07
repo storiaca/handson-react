@@ -5,8 +5,6 @@ import JobItem from "./components/JobListElement";
 //import jobs from "./data/jobs";
 import JobsAPI from './api/JobsAPI';
 import JobCreationForm from './components/JobCreationForm';
-//import Timer from './components/Timer';
-import ResizeDemo from './components/ResizeDemo';
 
 class App extends Component {
   state = { 
@@ -33,7 +31,6 @@ class App extends Component {
           <h1>Creating a Reusable List Component</h1>
         </header>
        
-        <ResizeDemo />
         <button onClick={this.toggleFormVisible}>
           {this.state.isFormVisible ? 'Hide form' : 'Show form'}
         </button>
