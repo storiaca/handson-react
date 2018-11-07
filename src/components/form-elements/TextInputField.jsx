@@ -4,7 +4,7 @@ import './InputField.css';
 export default class TextInputField extends Component {
 
   render() {
-    const { name, label, onChange, value } = this.props;
+    const { name, label, onChange, value, required, onBlur } = this.props;
     return (
       <div className="input-field">
         <label
@@ -19,7 +19,9 @@ export default class TextInputField extends Component {
           value={value}
           type="text"
           className="input-field__text-input"
+          required={required}
           onChange={onChange}
+          onBlur={onBlur}
         />
       </div>
     )
