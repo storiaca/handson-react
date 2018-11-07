@@ -1,14 +1,27 @@
 import React, { Component } from "react";
 import "./App.css";
-//import List from "./components/List";
-//import JobItem from "./components/JobListElement";
+import List from "./components/List";
+import JobItem from "./components/JobListElement";
 //import jobs from "./data/jobs";
+import JobsAPI from './api/JobsAPI';
 import JobCreationForm from './components/JobCreationForm';
+//import Timer from './components/Timer';
+import ResizeDemo from './components/ResizeDemo';
 
 class App extends Component {
-  state = { isFormVisible: true };
+  state = { 
+    jobs: [],
+    isFormVisible: false, 
+    loading: false
+  };
 
-  toggleFormVisible = () => {
+  componentDidMount = async() => {
+    this.setState({ loading: true });
+    const jobs = await JobsAPI.getJobs();
+    this.setState({ jobs, loading: false });
+  }
+
+   toggleFormVisible = () => {
     this.setState({ 
       isFormVisible: !this.state.isFormVisible
     })
@@ -19,14 +32,17 @@ class App extends Component {
         <header className="App-header">
           <h1>Creating a Reusable List Component</h1>
         </header>
-        {/* <List items={jobs} itemElement={JobItem} /> */}
-
+       
+        <ResizeDemo />
         <button onClick={this.toggleFormVisible}>
           {this.state.isFormVisible ? 'Hide form' : 'Show form'}
         </button>
-        <div style={{ visibility: this.state.isFormVisible ? 'visible' : 'hidden' }}>
+        <div style={{ display: this.state.isFormVisible ? 'block' : 'none' }}>
           <JobCreationForm />
         </div> 
+        <List items={this.state.jobs} itemElement={JobItem} />
+
+       
       </div>
     );
   }

@@ -54,6 +54,12 @@ export default class JobCreationForm extends Component {
       this.setState({ titleError: this.state.title.length < 10 });
     }
   }
+
+  componentDidUpdate(props, state) {
+    console.log('props ->', props);
+    console.log('state ->', state);
+  }
+  
   render() {
     const enabled = isFormDataValid(this.state);
     return (
