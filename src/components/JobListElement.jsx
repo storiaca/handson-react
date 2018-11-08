@@ -1,18 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import "./JobListElement.css";
 
-export class JobListElementMetaItem extends Component {
-  render() {
-    return (
-      <span>{this.props.emoji} {this.props.metaItem}</span>
-    );
-  }
-}
+export const JobListElementMetaItem = ({
+  emoji,
+  metaItem
+}) => <span>{emoji} {metaItem}</span>;
 
-export class JobListElementMeta extends Component {
-  render() {
-    const { company, location, salary } = this.props;
-    return (
+
+export const JobListElementMeta = ({
+  company,
+  location,
+  salary
+}) =>
       <p className="job_info">
         <JobListElementMetaItem 
           emoji="🏢 "
@@ -28,15 +27,15 @@ export class JobListElementMeta extends Component {
           emoji="💰$"
           metaItem={salary}
         />
-      </p>
-    );
-  }
-}
+      </p>;
 
-export default class JobListElement extends Component {
-  render() {
-    const { title, company, salary, location } = this.props;
-    return (
+
+const JobListElement = ({
+  title,
+  company,
+  salary,
+  location
+}) => 
       <a href="#" className="job-item">
         <div>
           <h2 className="job-item_title">{title}</h2>
@@ -46,12 +45,12 @@ export default class JobListElement extends Component {
             salary={salary}
           />
         </div>
-      </a>
-    );
-  }
-}
+      </a>;
+
 
 JobListElement.defaultProps = {
   location: 'Not specified',
   salary: 'Not given'
 };
+
+export default JobListElement;

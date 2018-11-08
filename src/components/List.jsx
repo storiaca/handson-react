@@ -1,20 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 
-export default class List extends Component {
-  render() {
-    const { items, itemElement: Item } = this.props;
-    return (
-      <div>
+const List = ({
+  items, 
+  itemElement: Item
+}) => <div>
         {items.map(item => (
           <Item {...item} key={item.id} />
         ))}
-      </div>
-    );
-  }
-}
+      </div>;
+
 
 List.propTypes = {
   items: PropTypes.array.isRequired,
   itemElement: PropTypes.func.isRequired,
 };
+
+export default List;

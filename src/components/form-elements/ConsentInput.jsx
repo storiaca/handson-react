@@ -1,16 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import CheckboxField from './CheckBoxField';
 
-export default class ConsentInput extends Component {
-  render() {
-    const { 
-      acceptedToS, 
-      subscribedToNewsletter,
-      onChange 
-    } = this.props;
-
-    return (
-      <div>
+const ConsentInput = ({
+  acceptedToS, 
+  subscribedToNewsletter,
+  onChange 
+}) => <div>
         <CheckboxField 
           onChange={onChange}
           value={acceptedToS}
@@ -23,7 +19,12 @@ export default class ConsentInput extends Component {
           name={subscribedToNewsletter}
           label="Send me your newsletter!"
         />
-      </div>
-    )
-  }
-}
+      </div>;
+
+ConsentInput.propTypes = {
+  onChange: PropTypes.func,
+  acceptedToS: PropTypes.bool,
+  subscribedToNewsletter: PropTypes.bool
+};
+
+export default ConsentInput;

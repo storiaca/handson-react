@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './InputField.css';
 
-export default class TextInputField extends Component {
-
-  render() {
-    const { name, label, onChange, value, required, onBlur } = this.props;
-    return (
-      <div className="input-field">
+const TextInputField = ({
+  name, label, onChange, value, required, onBlur
+}) => <div className="input-field">
         <label
           className="input-field__label"
           htmlFor={name}
@@ -24,10 +21,7 @@ export default class TextInputField extends Component {
           onChange={onChange}
           onBlur={onBlur}
         />
-      </div>
-    )
-  }
-}
+      </div>;
 
 TextInputField.propTypes = {
   name: PropTypes.string.isRequired,
@@ -37,3 +31,5 @@ TextInputField.propTypes = {
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func 
 };
+
+export default TextInputField;

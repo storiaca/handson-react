@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import './InputField.css';
 
-export default class SelectedField extends Component {
-
-  render() {
-    const {label, name, options, onChange, value} = this.props;
-    return (
-      <div className="input-field">
+const SelectedField = ({
+  label, name, options, onChange, value
+}) => <div className="input-field">
         <label
           className="input-field__label"
           htmlFor={name}
@@ -29,7 +27,14 @@ export default class SelectedField extends Component {
           </option>
          )}
         </select>
-      </div>
-    )
-  }
+      </div>;
+
+SelectedField.propTypes = {
+  label: PropTypes.string,
+  name: PropTypes.string,
+  options: PropTypes.array,
+  onChange: PropTypes.func,
+  value: PropTypes.string
 }
+
+export default SelectedField;
