@@ -1,10 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import Navigation from './components/Navigation';
+import { bounce, jello, shake } from 'react-animations';
 
 const Body = styled.div`
   padding: 20px;
   text-align: center;
+  p {
+    font-size: 1.4em;
+  }
 `;
 
 const Heading = styled.h1`
@@ -64,6 +68,26 @@ const Item = styled.div`
   border: 1px solid blue;
   flex: ${props => props.flex || 1};
 `;
+
+const rotate360 = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const RotatingAnimation = styled.div`
+  animation: ${rotate360} 2s linear infinite;
+`;
+
+const bounceAnimation = keyframes`${shake}`;
+
+const Bounce = styled.div`
+  animation: 1s ${bounceAnimation};
+`;
+
 export default () => 
   <Body>
     <Navigation />
@@ -79,6 +103,11 @@ export default () =>
     <SubtleButton>
       Learn More
     </SubtleButton>
+    {/* <RotatingAnimation>
+      [Rotation!]
+    </RotatingAnimation> */}
+    <Bounce>
+    
     <Box>
       <Item />
       <Item flex={3} />
@@ -86,4 +115,5 @@ export default () =>
       <Item flex={3} />
       <Item />
     </Box>
+    </Bounce>
   </Body>
