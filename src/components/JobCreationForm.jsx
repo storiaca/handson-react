@@ -4,7 +4,7 @@ import CheckBoxField from './form-elements/CheckBoxField';
 import SelectField from './form-elements/SelectedField';
 import './JobCreationForm.css';
 import ConsentInput from './form-elements/ConsentInput';
-
+import {PrimaryButton} from './Button';
 const locationOptions = [
   {value: '', label: 'Blank'}, 
   {value: 'Berlin', label: 'Berlin'}, 
@@ -121,12 +121,12 @@ export default class JobCreationForm extends Component {
           acceptedToS={this.state.acceptedToS}
           subscibedToNewsletter={this.state.subscibedToNewsletter}
         />
-        <button 
+        <PrimaryButton 
           className="job-form__button"
           disabled={!enabled}
         >
           Submit Job
-        </button>
+        </PrimaryButton>
       </form>
     )
   }
