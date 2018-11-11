@@ -1,30 +1,31 @@
 import React, { Component } from "react";
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from "styled-components";
 import "./App.css";
 import JobList from "./components/JobList";
-import JobsAPI from './api/JobsAPI';
-import JobCreationForm from './components/JobCreationForm';
-import {SubtleButton} from './components/Button';
-import theme from './theme';
+import JobsAPI from "./api/JobsAPI";
+import JobCreationForm from "./components/JobCreationForm";
+import Navigation from "./components/Navigation";
+import { SubtleButton } from "./components/Button";
+import theme from "./theme";
 
 class App extends Component {
-  state = { 
+  state = {
     jobs: [],
-    isFormVisible: false, 
+    isFormVisible: false,
     loading: false
   };
 
-  componentDidMount = async() => {
+  componentDidMount = async () => {
     this.setState({ loading: true });
     const jobs = await JobsAPI.getJobs();
     this.setState({ jobs, loading: false });
-  }
+  };
 
-   toggleFormVisible = () => {
-    this.setState({ 
+  toggleFormVisible = () => {
+    this.setState({
       isFormVisible: !this.state.isFormVisible
-    })
-  }
+    });
+  };
   render() {
     return (
       <ThemeProvider theme={theme}>
@@ -32,13 +33,13 @@ class App extends Component {
           <header className="App-header">
             <h1>Creating a Reusable List Component</h1>
           </header>
-        
+          <Navigation />
           <SubtleButton onClick={this.toggleFormVisible}>
-            {this.state.isFormVisible ? 'Hide form' : 'Show form'}
+            {this.state.isFormVisible ? "Hide form" : "Show form"}
           </SubtleButton>
-          <div style={{ display: this.state.isFormVisible ? 'block' : 'none' }}>
+          <div style={{ display: this.state.isFormVisible ? "block" : "none" }}>
             <JobCreationForm />
-          </div> 
+          </div>
           <JobList jobs={this.state.jobs} />
         </div>
       </ThemeProvider>

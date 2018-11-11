@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const NavigationList = styled.ul`
   display: flex;
@@ -10,7 +10,8 @@ const NavigationList = styled.ul`
 
 const NavigationItem = styled.li`
   margin: 4px 8px;
-  flex: ${props => props.grow || 1}
+  flex: ${props => props.grow || 1};
+  color: ${props => props.theme.colors.primary};
 `;
 
 const Input = styled.input`
@@ -19,14 +20,15 @@ const Input = styled.input`
   font-size: 16px;
 `;
 
-export default () => 
+export default () => (
   <nav>
     <NavigationList>
       <NavigationItem>Home</NavigationItem>
       <NavigationItem>Add Jobs</NavigationItem>
       <NavigationItem grow={3}>
-        <Input type="text" placeholder="Search for Jobs"/>
+        <Input type="text" placeholder="Search for Jobs" />
       </NavigationItem>
       <NavigationItem>Login</NavigationItem>
     </NavigationList>
-  </nav>;
+  </nav>
+);
