@@ -1,46 +1,37 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+} from 'react-router-dom';
 import { ThemeProvider } from "styled-components";
 import "./App.css";
-import JobList from "./components/JobList";
-import JobsAPI from "./api/JobsAPI";
-import JobCreationForm from "./components/JobCreationForm";
 import Navigation from "./components/Navigation";
-import { SubtleButton } from "./components/Button";
 import theme from "./theme";
+import JobListPage from './containers/JobListPage';
+import CreateJobPage from './containers/CreateJobPage';
+
+const NotFound = () => <div>404 Page</div>;
 
 class App extends Component {
-  state = {
-    jobs: [],
-    isFormVisible: false,
-    loading: false
-  };
-
-  componentDidMount = async () => {
-    this.setState({ loading: true });
-    const jobs = await JobsAPI.getJobs();
-    this.setState({ jobs, loading: false });
-  };
-
-  toggleFormVisible = () => {
-    this.setState({
-      isFormVisible: !this.state.isFormVisible
-    });
-  };
   render() {
     return (
       <ThemeProvider theme={theme}>
         <div className="App">
           <header className="App-header">
-            <h1>Creating a Reusable List Component</h1>
+            <h1>Routing With React Router</h1>
           </header>
-          <Navigation />
-          <SubtleButton onClick={this.toggleFormVisible}>
-            {this.state.isFormVisible ? "Hide form" : "Show form"}
-          </SubtleButton>
-          <div style={{ display: this.state.isFormVisible ? "block" : "none" }}>
-            <JobCreationForm />
-          </div>
-          <JobList jobs={this.state.jobs} />
+          <Router>
+            <Fragment>
+              <Navigation />
+              <Switch>
+                <Route exact path="/" component={JobListPage} />
+                <Route exact path="/add-job" component={CreateJobPage} />
+                <Route component={NotFound} />
+              </Switch>
+            </Fragment>
+          </Router>
         </div>
       </ThemeProvider>
     );
