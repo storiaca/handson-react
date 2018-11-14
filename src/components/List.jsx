@@ -5,9 +5,9 @@ const List = ({
   items, 
   itemElement: Item
 }) => <div>
-        {items.map(item => (
+        {items.map(item => 
           <Item {...item} key={item.id} />
-        ))}
+        )}
       </div>;
 
 
