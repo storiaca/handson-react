@@ -50,7 +50,7 @@ export default class JobCreationForm extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.onSubmit(this.state);
   };
 
   handleBlur = (e) => {
@@ -58,11 +58,6 @@ export default class JobCreationForm extends Component {
     if(name === 'title') {
       this.setState({ titleError: this.state.title.length < 10 });
     }
-  }
-
-  componentDidUpdate(props, state) {
-    console.log('props ->', props);
-    console.log('state ->', state);
   }
   
   render() {
@@ -123,7 +118,7 @@ export default class JobCreationForm extends Component {
         />
         <PrimaryButton 
           className="job-form__button"
-          disabled={!enabled}
+          disabled={!enabled || this.props.isSubmitting}
         >
           Submit Job
         </PrimaryButton>

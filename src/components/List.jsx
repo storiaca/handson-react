@@ -1,15 +1,12 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-const List = ({
-  items, 
-  itemElement: Item
-}) => <div>
-        {items.map(item => 
-          <Item {...item} key={item.id} />
-        )}
-      </div>;
-
+const List = ({ items, itemElement: Item }) => 
+  <div>
+    {items.map(item => 
+      <Item {...item} key={item.id} />
+    )}
+  </div>;
 
 List.propTypes = {
   items: PropTypes.array.isRequired,
