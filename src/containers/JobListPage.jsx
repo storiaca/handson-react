@@ -11,7 +11,7 @@ export default class JobListPage extends Component {
 
   componentDidMount = async () => {
     this.setState({ loading: true });
-    const {success, response, error }= await JobsAPI.getJobsMockedError();
+    const {success, response, error }= await JobsAPI.getJobsMocked();
     if(success) {
       this.setState({ 
         jobs: response.data, 
