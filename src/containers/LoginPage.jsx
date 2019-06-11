@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import styled from 'styled-components';
-import SubtleErrorBox from '../components/SubtleErrorBox';
-import { PrimaryButton } from '../components/Button'
-import TextInputField from '../components/form-elements/TextInputField';
-import AuthAPI from '../api/AuthAPI';
+import React, { Component } from "react";
+import styled from "styled-components";
+import SubtleErrorBox from "../components/SubtleErrorBox";
+import { PrimaryButton } from "../components/Button";
+import TextInputField from "../components/form-elements/TextInputField";
+import AuthAPI from "../api/AuthAPI";
 
 const LoginForm = styled.form`
   max-width: 420px;
@@ -15,26 +15,35 @@ const LoginForm = styled.form`
 export default class LoginPage extends Component {
   state = {
     loading: false,
-    username: '',
-    password: '',
+    username: "",
+    password: ""
   };
 
-  handleChange = (e) => {
-    const { name, value} = e.target;
+  handleChange = e => {
+    const { name, value } = e.target;
     this.setState({ [name]: value });
   };
 
-  handleSubmit = async (e) => {
-    e.preventDefault(); 
-    const { success, response, error } = await AuthAPI.loginMocked({ 
-      username: this.state.username, 
-      password: this.state.password 
+  handleSubmit = async e => {
+    e.preventDefault();
+    this.setState({
+      error: undefined,
+      loading: true
     });
-    if(success) {
-      this.props.onLogin(response.data)
+    const { success, response, error } = await AuthAPI.loginMocked({
+      username: this.state.username,
+      password: this.state.password
+    });
+    if (success) {
+      this.props.onLogin(response.data);
+    } else {
+      this.setState({
+        error,
+        loading: false
+      });
     }
     // TODO call this.props.onLogin()
-  }
+  };
 
   render() {
     return (
@@ -53,10 +62,9 @@ export default class LoginPage extends Component {
             type="password"
             value={this.state.password}
           />
-          <PrimaryButton>
-            Login
-          </PrimaryButton>
-      </LoginForm>
+          <PrimaryButton>Login</PrimaryButton>
+          {this.state.error && <SubtleErrorBox label={this.state.error} />}
+        </LoginForm>
       </div>
     );
   }
