@@ -28,7 +28,7 @@ export default ({ isLoggedIn }) => (
   <nav>
     <NavigationList>
       <NavigationItem>
-        <Link to="/">Home</Link>y
+        <Link to="/">Home</Link>
       </NavigationItem>
       {isLoggedIn && (
         <NavigationItem>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
+import localStorage from "store2";
 import { ThemeProvider } from "styled-components";
 import "./App.css";
 import Navigation from "./components/Navigation";
@@ -14,6 +15,7 @@ class App extends Component {
   state = { user: undefined };
 
   onLogin = user => {
+    localStorage.set("user", user);
     this.setState({ user });
     this.props.history.push("/");
   };
