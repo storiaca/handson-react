@@ -8,6 +8,8 @@ import theme from "./theme";
 import JobListPage from "./containers/JobListPage";
 import CreateJobPage from "./containers/CreateJobPage";
 import LoginPage from "./containers/LoginPage";
+import ToS from "./containers/ToS";
+import PrivacyPolicy from "./containers/PrivacyPolicy";
 import AuthAPI from "./api/AuthAPI";
 
 const NotFound = () => <div>404 Page</div>;
@@ -72,6 +74,8 @@ class App extends Component {
                 )
               }
             />
+            <Route exact path="/terms-of-service" component={ToS} />
+            <Route exact path="/privacy-policy" component={PrivacyPolicy} />
             <Route component={NotFound} />
           </Switch>
         </div>
