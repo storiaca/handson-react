@@ -13,7 +13,7 @@ export default {
               }
             }
           }),
-        1
+        2000
       )
     ),
   loginMockedError: () =>

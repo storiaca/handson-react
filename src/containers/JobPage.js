@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
-import JobsAPI from '../api/JobsAPI';
-import JobListElementHoC from '../components/JobListElement';
-import ExternalLink from '../components/ExternalLink';
-import SubtleErrorBox from '../components/SubtleErrorBox';
-import Spinner from '../components/Spinner';
+import React from "react";
+import styled from "styled-components";
+import JobsAPI from "../api/JobsAPI";
+import JobListElement from "../components/JobListElement";
+import ExternalLink from "../components/ExternalLink";
+import SubtleErrorBox from "../components/SubtleErrorBox";
+import Spinner from "../components/Spinner";
 
-const JobListElement = JobListElementHoC(false, false);
+//const JobListElement = JobListElementHoC(false, false);
 
 const Background = styled.div`
   width: 100%;
@@ -26,7 +26,7 @@ const Background = styled.div`
 export default class JobPage extends React.Component {
   state = {
     loading: false,
-    job: undefined,
+    job: undefined
   };
 
   componentDidMount = async () => {
@@ -38,12 +38,12 @@ export default class JobPage extends React.Component {
       this.setState({
         job: response.data,
         loading: false,
-        error: undefined,
+        error: undefined
       });
     } else {
       this.setState({
         error,
-        loading: false,
+        loading: false
       });
     }
   };
@@ -55,18 +55,14 @@ export default class JobPage extends React.Component {
     if (this.state.job) {
       return (
         <Background promoImageUrl={this.state.job.promoImageUrl}>
-          <JobListElement
-            {...this.state.job}
-          />
-          <ExternalLink href={this.state.job.applyAt}>
-            Apply Now!
-          </ExternalLink>
+          <JobListElement {...this.state.job} />
+          <ExternalLink href={this.state.job.applyAt}>Apply Now!</ExternalLink>
         </Background>
       );
     }
     if (this.state.error) {
       return <SubtleErrorBox label={this.state.error} />;
     }
-    return <div></div>;
+    return <div />;
   }
 }

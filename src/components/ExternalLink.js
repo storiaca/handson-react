@@ -1,7 +1,9 @@
-import { PrimaryButton } from './Button';
+import { PrimaryButton } from "./Button";
 
-const Link = PrimaryButton.withComponent('a');
+const Link = PrimaryButton.withComponent("a");
 
-export default Link.extend`
-  text-decoration: none;
-`;
+// export default Link.extend`
+//   text-decoration: none;
+// `;
+
+export default Link;

@@ -1,5 +1,5 @@
-//import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Button = styled.button`
   padding: 12px 44px;
@@ -28,5 +28,3 @@ export const SubtleButton = styled(Button)`
     color: ${props => props.theme.colors.secondary};
   }
 `;
-
-
