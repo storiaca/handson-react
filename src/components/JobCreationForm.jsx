@@ -1,73 +1,70 @@
-import React, { Component } from 'react'
-import TextInputField from './form-elements/TextInputField';
-import CheckBoxField from './form-elements/CheckBoxField';
-import SelectField from './form-elements/SelectedField';
-import './JobCreationForm.css';
-import ConsentInput from './form-elements/ConsentInput';
-import {PrimaryButton} from './Button';
+import React, { Component } from "react";
+import TextInputField from "./form-elements/TextInputField";
+import CheckBoxField from "./form-elements/CheckBoxField";
+import SelectField from "./form-elements/SelectedField";
+import "./JobCreationForm.css";
+import ConsentInput from "./form-elements/ConsentInput";
+import { PrimaryButton } from "./Button";
+import Spinner from "./Spinner";
 const locationOptions = [
-  {value: '', label: 'Blank'}, 
-  {value: 'Berlin', label: 'Berlin'}, 
-  {value: 'San Francisko', label: 'San Francisko'}, 
-  {value: 'London', label: 'London'}, 
-  {value: 'Austin', label: 'Austin'}, 
-  {value: 'Tokyo', label: 'Tokyo'},
-  {value: 'Barcelona', label: 'Barcelona'}, 
-  {value: 'Other', label: 'Other'}
+  { value: "", label: "Blank" },
+  { value: "Berlin", label: "Berlin" },
+  { value: "San Francisko", label: "San Francisko" },
+  { value: "London", label: "London" },
+  { value: "Austin", label: "Austin" },
+  { value: "Tokyo", label: "Tokyo" },
+  { value: "Barcelona", label: "Barcelona" },
+  { value: "Other", label: "Other" }
 ];
 
 const initialState = {
-  title: '',
-  company: '',
-  salary: '',
+  title: "",
+  company: "",
+  salary: "",
   isRemoteFriendly: false,
-  location: '',
+  location: "",
   acceptedToS: false,
   subscibedToNewsletter: false
 };
 
-const isFormDataValid = (state) => 
+const isFormDataValid = state =>
   state.title.length >= 10 &&
   state.company.length > 0 &&
   state.salary.length > 0 &&
   state.acceptedToS;
 
-
 export default class JobCreationForm extends Component {
   state = initialState;
 
-  handleChange = (e) => {
-    const {type, name, value, checked } = e.target;
-    if(type === 'checkbox') {
+  handleChange = e => {
+    const { type, name, value, checked } = e.target;
+    if (type === "checkbox") {
       this.setState({ [name]: checked });
     } else {
-      this.setState({ [name]: value})
+      this.setState({ [name]: value });
     }
-    if(name === 'title' && value.length >= 10) {
-      this.setState({ titleError: false})
+    if (name === "title" && value.length >= 10) {
+      this.setState({ titleError: false });
     }
   };
-  
-  handleSubmit = (e) => {
+
+  handleSubmit = e => {
     e.preventDefault();
     this.props.onSubmit(this.state);
   };
 
-  handleBlur = (e) => {
+  handleBlur = e => {
     const { name } = e.target;
-    if(name === 'title') {
+    if (name === "title") {
       this.setState({ titleError: this.state.title.length < 10 });
     }
-  }
-  
+  };
+
   render() {
     const enabled = isFormDataValid(this.state);
     return (
-      <form 
-        onSubmit={this.handleSubmit}
-        className="job-form"
-      >
-        <TextInputField 
+      <form onSubmit={this.handleSubmit} className="job-form">
+        <TextInputField
           name="title"
           label="Title"
           onChange={this.handleChange}
@@ -75,13 +72,12 @@ export default class JobCreationForm extends Component {
           required={true}
           onBlur={this.handleBlur}
         />
-        {this.state.titleError ? 
+        {this.state.titleError ? (
           <p className="job-form__error-label">
             Should be at least 10 characters long.
-          </p> : 
-          null
-        }
-        <TextInputField 
+          </p>
+        ) : null}
+        <TextInputField
           name="company"
           label="Company"
           onChange={this.handleChange}
@@ -97,32 +93,33 @@ export default class JobCreationForm extends Component {
           required={true}
         />
 
-        <CheckBoxField 
+        <CheckBoxField
           name="isRemoteFriendly"
           label="Remote friendly?"
           onChange={this.handleChange}
           value={this.state.isRemoteFriendly}
         />
 
-        <SelectField 
+        <SelectField
           name="location"
           label="Location"
           options={locationOptions}
           onChange={this.handleChange}
           value={this.state.location}
         />
-        <ConsentInput 
+        <ConsentInput
           onChange={this.handleChange}
           acceptedToS={this.state.acceptedToS}
           subscibedToNewsletter={this.state.subscibedToNewsletter}
         />
-        <PrimaryButton 
+        <PrimaryButton
           className="job-form__button"
           disabled={!enabled || this.props.isSubmitting}
         >
           Submit Job
         </PrimaryButton>
+        {this.props.isSubmitting && <Spinner />}
       </form>
-    )
+    );
   }
 }

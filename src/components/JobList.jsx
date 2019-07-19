@@ -9,8 +9,9 @@ import JobListElement from "./JobListElement";
 
 class JobList extends Component {
   render() {
-    const { jobs } = this.props;
-    return <List items={jobs} itemElement={JobListElement} />;
+    const { jobs, withStats } = this.props;
+    const jobItems = jobs.map(job => ({ ...job, withStats: withStats }));
+    return <List items={jobItems} itemElement={JobListElement} />;
   }
 }
 JobList.propTypes = {

@@ -1,5 +1,6 @@
 import jobs from "../data/jobs";
 import NetworkService from "./NetworkService";
+import UserRole from "../enums/UserRole";
 
 export default {
   getJobsMocked: searchQuery =>
@@ -36,6 +37,24 @@ export default {
   getJobs: async () => {
     return await NetworkService.get("/jobs");
   },
+  getJobsToManageMocked: (ownerId, userRole) =>
+    new Promise(resolve =>
+      setTimeout(
+        () =>
+          resolve({
+            success: true,
+            response: {
+              data: jobs.filter(job => {
+                if (userRole === UserRole.ADMIN) {
+                  return true;
+                }
+                return job.createdBy === ownerId;
+              })
+            }
+          }),
+        1000
+      )
+    ),
   getJobMocked: slug =>
     new Promise(resolve => {
       const job = jobs.find(job => job.slug === slug);

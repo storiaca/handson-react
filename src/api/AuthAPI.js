@@ -1,3 +1,4 @@
+import UserRole from "../enums/UserRole";
 export default {
   loginMocked: ({ username }) =>
     new Promise(resolve =>
@@ -9,7 +10,12 @@ export default {
               data: {
                 username,
                 sessionToken:
-                  "pf2oi86edebfc8zffedfi5xb9m2e028baneb4uldb6e2af0ye8acbe8ag68f60z28ffeag0t0"
+                  "pf2oi86edebfc8zffedfi5xb9m2e028baneb4uldb6e2af0ye8acbe8ag68f60z28ffeag0t0",
+                id:
+                  username === "admin"
+                    ? "35f7b2c8-9965-4682-831b-8071d9785242"
+                    : "b237f1f2-455c-476b-bcbb-66a92c0fc7e2",
+                role: username === "admin" ? UserRole.ADMIN : UserRole.USER
               }
             }
           }),
